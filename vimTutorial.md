@@ -3,8 +3,7 @@
 本教程记录使用vim编码过程中常用命令。
 ## vim模式
 
-vim编辑器主要包括三种模式：**normal**、**insert**、**visual**、**command**. 默认模式是**normal**,通过按esc键从其他模式切换到normal模式.  
-normal模式下主要使用**操作符-动作**组合命令实现各种编辑.  
+vim编辑器主要包括三种模式：**normal**、**insert**、**visual**、**command**. 默认模式是**normal**,通过按esc键从其他模式切换到normal模式. normal模式下主要使用**操作符-动作**组合命令实现各种编辑.  
 #### 操作符类型与动作
 
 |操作符类别 | |动作类别 |主要包括移动动作 |
