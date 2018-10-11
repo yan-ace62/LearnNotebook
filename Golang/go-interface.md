@@ -70,11 +70,11 @@ Binary类型的变量在打印的时候，会自动调用String方法进行数�
 先来个热身，假设一个Binary类型的变量是一个由两个32位字组成的64位的整数（参看上一篇文章，这里使用32位的机器）:
 
 ![gointer1](./gointer1.png)
+<img src="./gointer1.png" align="center">
 
 Interface变量用两个字来存储，提供两个指针，一个指向了存储在interface类型中的类型信息，另外一个指向关联数据。把b赋值给一个Stringer类型的interface变量，就会在内存中为其设置这两个指针的相应的值。
 
 ![gointer2](./gointer2.png)
-<img src="./gointer2.png" align="right">
 
 在interface变量中的指针箭头用灰色表示，用于说明他们是隐含的，没有直接暴露给go程序.
 
