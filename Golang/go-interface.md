@@ -69,12 +69,11 @@ Binary类型的变量在打印的时候，会自动调用String方法进行数�
 
 先来个热身，假设一个Binary类型的变量是一个由两个32位字组成的64位的整数（参看上一篇文章，这里使用32位的机器）:
 
-![gointer1](./gointer1.png)
 <img src="./gointer1.png" align="center">
 
 Interface变量用两个字来存储，提供两个指针，一个指向了存储在interface类型中的类型信息，另外一个指向关联数据。把b赋值给一个Stringer类型的interface变量，就会在内存中为其设置这两个指针的相应的值。
 
-![gointer2](./gointer2.png)
+<img src="./gointer2.png" align="center">
 
 在interface变量中的指针箭头用灰色表示，用于说明他们是隐含的，没有直接暴露给go程序.
 
@@ -94,19 +93,19 @@ Interface变量用两个字来存储，提供两个指针，一个指向了存�
 
 首先，如果涉及到的接口类型是空的，也就是说没有接口类型的方法，那么itable除了提供原类型以外，没有其他作用，在这种情况下，itable可以被删除，然后指针直接指向原类型信息。
 
-![gointer3.png](./gointer3.png)
+<img src="./gointer3.png" align="center">
 
 不管接口类型是否有方法，他都是一个静态的属性，要么代码中的类型被声明成interface{}，要么被声明成interface{ methods }，这样编译器就知道程序中应该如何进行处理。
 
 另外，如果interface变量中的数据正好是一个机器字，那么久不需要在堆生进行分配，如果我们定义Binary32为Binary类型，但实现的时候是作为uint32，那么存放在interface变量的时候就可以放在第二个字中：
 
-![gointer4.png](./gointer4.png)
+<img src="./gointer4.png" align="center">
 
 interface变量中的数据是使用指针还是内嵌的方式，由变量类型的大小决定。编译器会让类型方法表中的方法正确的使用传递给他的字，如果数据类型正好是一个字，那么久直接使用那个字，如果不是，就只是用字指向的数据，下图说明了这一点，在上面的Binary版本中的itable中的方法是(*Binary).String，但是在Binary32的例子中，itable中的方法是Binary32.String，而不是(*Binary32).String。
 
 当然，只有一个字的数据的空的方法的interface变量，可以享受双重优化：
 
-![gointer5.png](./gointer5.png)
+<img src="./gointer5.png" align="center">
 
 ## 方法查找性能
 Smalltalk等动态语言会在方法每次调用的时候进行方法查找，为了优化性能，会在每个调用位置使用一个简单的入口缓存，在一个多线程的程序中，这些缓存必须被妥善的管理，因为多个线程可能会同时使用，即使没有发生冲突，缓存依然是需要争夺的资源。
