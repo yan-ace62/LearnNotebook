@@ -20,3 +20,37 @@ Git项目包含三个工作区域的概念(与文件状态一一对应)：Git仓
     git clone [url] // git支持两种协议的url: https协议与git://协议.
     git clone https://github.com/yan-ace62/LearnNotebook.git
     git clone git@github.com:yan-ace62/LearnNotebook.git
+
+### 分支操作
+切换分支分为切换本地分支与远程分支。
+
+1.显示分支信息
+
+    git branch     显示本地分支信息
+    git branch -r  显示远程分支信息
+    git branch -a  显示所有分支信息
+
+
+2.切换分支
+
+    git checkout branchname     切换到branchname分支
+    git checkout -b branchname  创建branchname分支并切换过去
+
+3.删除分支
+
+    git branch -d branchname      删除本地branchname分支
+    git push -d origin branchname 删除远程branchname分支
+    git remote prune origin       删除不存在的远程分支在本地缓存的分支信息
+
+4.推送本地分支到远程服务端
+
+    git push [remote-name] [branch-name] 推送branch-name到remote-name远程仓库
+    git push origin develop  推送develop到远程仓库，如果远程仓库不存在develop分支，那么新建develop分支
+
+5.将本地分支与远程分支进行关联
+
+    git branch --set-upstream-to=origin develop 将本地分支与远程分支develop建立关联
+
+6.分支重命名
+
+    git branch -m oldbranchname newbranchname
